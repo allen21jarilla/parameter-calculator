@@ -146,7 +146,7 @@ if selected_activities:
         st.dataframe(
             final_df[['Grouped_Activity', 'Quantity', 'Output_Unit', 'Number of Crews', 'Total_Duration (Days)', 'Total_Manhours', 'Total_Eqpt_Hours']], 
             hide_index=True, 
-            use_container_width=True
+            use_container_width=True,
             column_config=clean_names
         )
         
