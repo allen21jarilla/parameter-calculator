@@ -2,6 +2,25 @@ import streamlit as st
 import pandas as pd
 import io
 
+
+import streamlit as st
+
+# Custom CSS to hide Streamlit elements
+hide_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    /* Hides the 'Hosted with Streamlit' button */
+    .stAppDeployButton {display: none;}
+    [data-testid="stStatusWidget"] {display: none;}
+    /* Optional: Reduces top padding for a tighter fit in Looker */
+    .block-container {padding-top: 2rem;}
+    </style>
+"""
+st.markdown(hide_style, unsafe_allow_html=True)
+
+
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="EEI Corporation Parameter Tool", layout="wide")
 
