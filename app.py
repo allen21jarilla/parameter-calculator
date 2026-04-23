@@ -23,7 +23,7 @@ st.markdown(hide_style, unsafe_allow_html=True)
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="EEI Corporation Parameter Tool", layout="wide")
 
-st.title("🏗️ EEI Corporation Parameter Tool")
+st.title("EEI Corporation Parameter Tool")
 st.markdown("Input project details, select activities, and calculate total duration, manhours, and equipment needs.")
 
 # --- 1. PROJECT METADATA & SETTINGS ---
@@ -57,6 +57,21 @@ try:
 except Exception as e:
     st.error(f"Could not load data from the Google Sheet. Please ensure the link is public. Error: {e}")
     st.stop()
+
+# --- CUSTOM COLUMN DISPLAY NAMES ---
+# The left side is the Google Sheet name. The right side is what the user sees.
+clean_names = {
+    "Grouped_Activity": "Activity Description",
+    "Output_Unit": "Unit",
+    "Avg_Output_per_Hour": "Output/Hr",
+    "Avg_Eqpt_Hrs_per_Unit": "Eqpt Factor",
+    "Avg_Manhours_per_Unit": "Labor Factor",
+    "Total_Duration (Days)": "Total Days",
+    "Total_Manhours": "Total Manhours",
+    "Total_Eqpt_Hours": "Total Eqpt Hrs",
+    "Crew_Breakdown": "Crew Lineup",
+    "Primary_Equipment_Required": "Equipment List"
+}
 
 # --- 3. USER SELECTION ---
 st.subheader("2. Select Project Activities")
@@ -94,6 +109,7 @@ if selected_activities:
         disabled=['Grouped_Activity', 'Output_Unit', 'Avg_Output_per_Hour', 'Avg_Eqpt_Hrs_per_Unit', 'Avg_Manhours_per_Unit'],
         hide_index=True,
         use_container_width=True
+        column_config=clean_names
     )
     
     # --- 5. CALCULATIONS ---
@@ -131,16 +147,18 @@ if selected_activities:
             final_df[['Grouped_Activity', 'Quantity', 'Output_Unit', 'Number of Crews', 'Total_Duration (Days)', 'Total_Manhours', 'Total_Eqpt_Hours']], 
             hide_index=True, 
             use_container_width=True
+            column_config=clean_names
         )
         
         st.write("### Resource Lineup Required")
         colA, colB = st.columns(2)
         with colA:
             st.write("**Crew Breakdown per Activity:**")
-            st.dataframe(final_df[['Grouped_Activity', 'Crew_Breakdown']].fillna("None Listed"), hide_index=True, use_container_width=True)
+            st.dataframe(final_df[['Grouped_Activity', 'Crew_Breakdown']].fillna("None Listed"), hide_index=True, use_container_width=True, column_config=clean_names)
         with colB:
             st.write("**Equipment Required per Activity:**")
-            st.dataframe(final_df[['Grouped_Activity', 'Primary_Equipment_Required']].fillna("None Listed"), hide_index=True, use_container_width=True)
+            st.dataframe(final_df[['Grouped_Activity', 'Primary_Equipment_Required']].fillna("None Listed"), hide_index=True, use_container_width=True, column_config=clean_names)
+    
 
         # --- 6. EXPORT TO EXCEL ---
         st.divider()
