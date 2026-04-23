@@ -23,7 +23,7 @@ st.divider()
 # --- 2. CONNECT TO GOOGLE SHEETS ---
 # We use the Google Visualization API format to safely pull a specific tab by name as a CSV
 SHEET_ID = "13RdBUd8bolwBn3xHRelZTJWUIT-h9mQ5-ErkOSeWa9I"
-TAB_NAME = "DPWH (Combined)"
+TAB_NAME = "DPWH%20(Combined)"
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={TAB_NAME}"
 
 @st.cache_data(ttl=300) # Caches data for 5 mins to keep the app fast
