@@ -108,7 +108,7 @@ if selected_activities:
         project_df[['Quantity', 'Number of Crews', 'Grouped_Activity', 'Output_Unit', 'Avg_Output_per_Hour', 'Avg_Eqpt_Hrs_per_Unit', 'Avg_Manhours_per_Unit']],
         disabled=['Grouped_Activity', 'Output_Unit', 'Avg_Output_per_Hour', 'Avg_Eqpt_Hrs_per_Unit', 'Avg_Manhours_per_Unit'],
         hide_index=True,
-        use_container_width=True
+        use_container_width=True,
         column_config=clean_names
     )
     
