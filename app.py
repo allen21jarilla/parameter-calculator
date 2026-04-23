@@ -164,7 +164,8 @@ if selected_activities:
         st.divider()
         st.subheader("5. Export Project Plan")
         
-        export_df = final_df[['Grouped_Activity', 'Quantity', 'Output_Unit', 'Number of Crews', 'Total_Duration (Days)', 'Total_Manhours', 'Total_Eqpt_Hours', 'Crew_Breakdown', 'Primary_Equipment_Required']]
+       # Clean up the final dataframe for the Excel export AND rename the headers
+        export_df = final_df[['Grouped_Activity', 'Quantity', 'Output_Unit', 'Number of Crews', 'Total_Duration (Days)', 'Total_Manhours', 'Total_Eqpt_Hours', 'Crew_Breakdown', 'Primary_Equipment_Required']].rename(columns=clean_names)
         
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
